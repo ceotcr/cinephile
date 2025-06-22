@@ -42,7 +42,7 @@ This is my **personal Telegram bot** built with **NestJS** that:
 ## 📦 Local Setup
 
 ```bash
-git clone https://github.com/your-username/cinephile
+git clone https://github.com/ceotcr/cinephile
 cd cinephile
 
 npm install
