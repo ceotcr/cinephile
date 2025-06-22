@@ -4,6 +4,6 @@ import { SimklService } from "./simkl.service";
 @Module({
     imports: [],
     providers: [SimklService],
-    exports: [],
+    exports: [SimklService],
 })
 export class SimklModule { }

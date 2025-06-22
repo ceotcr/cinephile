@@ -7,18 +7,9 @@ export class Watchlist {
     @Column()
     title: string;
 
-    @Column()
-    description: string;
-
     @Column({ type: 'datetime' })
     nextEpisodeDate: Date;
 
     @Column()
     imageUrl: string;
-
-    @Column()
-    link: string;
-
-    @Column({ default: false })
-    isWatched: boolean;
 }

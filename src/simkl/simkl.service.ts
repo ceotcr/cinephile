@@ -1,9 +1,9 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { SimklAnimeWithEpisodes, SimklEpisode } from "./interfaces";
+import { SimklAnimeWithEpisodes, SimklEpisode, SimklSearchResult } from "./interfaces";
 
 @Injectable()
 export class SimklService {
-    async getAnimeEpisodes(animeId: string): Promise<SimklEpisode[]> {
+    async getAnimeEpisodes(animeId: number): Promise<SimklEpisode[]> {
         const url = `${process.env.SIMKL_BASE_URL as string}${process.env.ANIME_EPISODES_PATH as string}/${animeId}?client_id=${process.env.SIMKL_CLIENT_ID as string}`;
         try {
             const response = await fetch(url, {
@@ -23,7 +23,7 @@ export class SimklService {
         }
     }
 
-    async getAnime(animeId: string): Promise<SimklAnimeWithEpisodes> {
+    async getAnime(animeId: number): Promise<SimklAnimeWithEpisodes> {
         const url = `${process.env.SIMKL_BASE_URL as string}${process.env.ANIME_PATH as string}/${animeId}?client_id=${process.env.SIMKL_CLIENT_ID as string}`;
         try {
             const response = await fetch(url, {
@@ -44,6 +44,26 @@ export class SimklService {
             };
         } catch (error) {
             throw new InternalServerErrorException(`Failed to fetch anime data: ${error.message}`);
+        }
+    }
+
+    async searchAnime(query: string): Promise<SimklSearchResult[]> {
+        const url = `${process.env.SIMKL_BASE_URL as string}${process.env.ANIME_SEARCH_PATH as string}?q=${encodeURIComponent(query)}&limit=50&client_id=${process.env.SIMKL_CLIENT_ID as string}`;
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error fetching search results: ${response.statusText}`);
+            }
+
+            return await response.json() as SimklSearchResult[];
+        } catch (error) {
+            throw new InternalServerErrorException(`Failed to search anime: ${error.message}`);
         }
     }
 }

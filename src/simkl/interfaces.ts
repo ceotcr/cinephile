@@ -23,3 +23,17 @@ export interface SimklAnime {
 export interface SimklAnimeWithEpisodes extends SimklAnime {
     episodes: SimklEpisode[];
 }
+
+export interface SimklSearchResult {
+    title: string;
+    title_en?: string;
+    title_romaji?: string;
+    year: number;
+    endpoint_type: string;
+    type: string;
+    poster: string;
+    ids: {
+        simkl_id: number;
+        slug: string;
+    };
+}

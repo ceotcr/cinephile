@@ -7,19 +7,11 @@ export class CreateWatchlistDto {
 
     @IsNotEmpty()
     @IsString()
-    name: string;
-
-    @IsNotEmpty()
-    @IsString()
-    description: string;
+    title: string;
 
     @IsNotEmpty()
     @IsUrl()
     imageUrl: string;
-
-    @IsNotEmpty()
-    @IsUrl()
-    link: string;
 
     @IsNotEmpty()
     @IsDate()

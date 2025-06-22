@@ -3,7 +3,7 @@ import { CreateWatchlistDto } from './dto/create-watchlist.dto';
 import { UpdateWatchlistDto } from './dto/update-watchlist.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Watchlist } from './entities/watchlist.entity';
-import { Repository } from 'typeorm';
+import { Repository, LessThan, MoreThan } from 'typeorm';
 
 @Injectable()
 export class WatchlistService {
@@ -32,5 +32,22 @@ export class WatchlistService {
 
   remove(id: number) {
     return this.watchlistRepository.delete(id);
+  }
+
+  getOldEpisodesForUpdation() {
+    const now = new Date();
+    return this.watchlistRepository.find({
+      where: {
+        nextEpisodeDate: LessThan(now),
+      },
+    });
+  }
+  getNewEpisodes() {
+    const now = new Date();
+    return this.watchlistRepository.find({
+      where: {
+        nextEpisodeDate: MoreThan(now),
+      },
+    });
   }
 }

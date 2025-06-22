@@ -5,6 +5,10 @@ import { WatchlistModule } from './watchlist/watchlist.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Watchlist } from './watchlist/entities/watchlist.entity';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
+import { BotModule } from './bot/bot.module';
+import { SimklModule } from './simkl/simkl.module';
+import { SchedulerModule } from './scheduler/scheduler.module';
 
 @Module({
   imports: [
@@ -18,7 +22,11 @@ import { ConfigModule } from '@nestjs/config';
       entities: [Watchlist],
       synchronize: true,
     }),
-    WatchlistModule
+    ScheduleModule.forRoot(),
+    SchedulerModule,
+    WatchlistModule,
+    BotModule,
+    SimklModule
   ],
   controllers: [AppController],
   providers: [AppService],
