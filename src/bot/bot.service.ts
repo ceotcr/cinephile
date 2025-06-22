@@ -78,7 +78,7 @@ export class BotService implements OnModuleInit {
         }
         for (const item of watchlist) {
             const caption = `📅 *Today's Anime*: _${item.title}_\n` +
-                `🕒 *Airing Time*: ${new Date(item.nextEpisodeDate).toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })}\n`;
+                `🕒 *Airing Time*: ${new Date(item.nextEpisodeDate).toLocaleString('en-US', { timeZone: process.env.TIMEZONE })}\n`;
 
             await this.bot.sendPhoto(
                 this.chatId,

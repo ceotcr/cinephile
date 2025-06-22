@@ -41,7 +41,7 @@ export class AddCommand implements BotCommand {
             });
 
             const message = show
-                ? `✅ Added to watchlist: *${show.title}*\n🕒 Next episode: ${nextEpisodeDate.toLocaleString()}`
+                ? `✅ Added to watchlist: *${show.title}*\n🕒 Next episode: ${nextEpisodeDate.toLocaleString('en_US', { timeZone: process.env.TIMEZONE })}`
                 : '❌ Failed to add show to watchlist.';
 
             this.bot.sendMessage(msg.chat.id, message, { parse_mode: 'Markdown' });

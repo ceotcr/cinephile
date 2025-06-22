@@ -15,7 +15,7 @@ export class SchedulerService {
         private readonly botService: BotService
     ) { }
 
-    @Cron('0 0 0 * * *', { timeZone: 'Asia/Kolkata' })
+    @Cron('0 0 0 * * *', { timeZone: process.env.TIMEZONE })
     async notifyDaily() {
         this.logger.log('🔔 Running daily anime notifier');
 

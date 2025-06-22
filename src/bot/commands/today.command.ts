@@ -11,7 +11,7 @@ export class TodayCommand implements BotCommand {
     async handle(msg: TelegramBot.Message, match: RegExpExecArray | null) {
         const shows = await this.watchlistService.getNewEpisodes();
         let message = shows.length > 0
-            ? 'Today\'s shows:\n' + shows.map(s => `• ${s.title} - Time: ${s.nextEpisodeDate.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata' })}`).join('\n')
+            ? 'Today\'s shows:\n' + shows.map(s => `• ${s.title} - Time: ${s.nextEpisodeDate.toLocaleTimeString('en-US', { timeZone: process.env.TIMEZONE })}`).join('\n')
             : 'No shows scheduled for today.';
         this.bot.sendMessage(msg.chat.id, message);
     }
